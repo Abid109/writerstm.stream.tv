@@ -1,0 +1,73 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          cmdline-tools-version: 10406996
+          packages: 'platforms;android-33 build-tools;33.0.0 platform-tools'
+
+      - name: Accept SDK licenses
+        run: |
+          yes | sdkmanager --licenses || true
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v3
+        with:
+          gradle-version: '8.0'
+
+      - name: Build APK
+        run: |
+          cd android
+          gradle assembleRelease --stacktrace
+
+      - name: Sign APK with debug key
+        run: |
+          cd android
+          if [ ! -f debug.keystore ]; then
+            keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          fi
+          ${ANDROID_SDK_ROOT}/build-tools/33.0.0/apksigner sign --ks debug.keystore --ks-pass pass:android --key-pass pass:android --in app/build/outputs/apk/release/app-release-unsigned.apk --out app/build/outputs/apk/release/app-release-signed.apk
+          ${ANDROID_SDK_ROOT}/build-tools/33.0.0/apksigner verify app/build/outputs/apk/release/app-release-signed.apk
+
+      - name: Upload Signed APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: writerstm-signed-apk
+          path: android/app/build/outputs/apk/release/app-release-signed.apk
+          retention-days: 30
+
+      - name: Create Release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.run_number }}
+          name: Release v${{ github.run_number }}
+          body: |
+            Writerstm.stream Android TV APK
+            - Auto-built from commit ${{ github.sha }}
+          files: |
+            android/app/build/outputs/apk/release/app-release-signed.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
