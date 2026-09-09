@@ -25,6 +25,4 @@ android {
     }
 }
 
-dependencies {
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-}
+// No dependencies needed - app only uses built-in Android WebView
