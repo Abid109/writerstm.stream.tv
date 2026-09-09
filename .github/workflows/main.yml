@@ -29,29 +29,25 @@ jobs:
         run: |
           yes | sdkmanager --licenses || true
 
-      - name: Install Gradle 8.0
+      - name: Install Gradle
         run: |
           wget https://services.gradle.org/distributions/gradle-8.0-bin.zip -O gradle.zip
           unzip -q gradle.zip
           sudo mv gradle-8.0 /opt/gradle
           sudo ln -sf /opt/gradle/bin/gradle /usr/local/bin/gradle
-          gradle --version
 
       - name: Build APK
         run: |
           cd android
           gradle assembleRelease --stacktrace
 
-      - name: Sign APK with debug key
+      - name: Sign APK
         run: |
           cd android
-          if [ ! -f debug.keystore ]; then
-            keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
-          fi
+          keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
           ${ANDROID_SDK_ROOT}/build-tools/33.0.0/apksigner sign --ks debug.keystore --ks-pass pass:android --key-pass pass:android --in app/build/outputs/apk/release/app-release-unsigned.apk --out app/build/outputs/apk/release/app-release-signed.apk
-          ${ANDROID_SDK_ROOT}/build-tools/33.0.0/apksigner verify app/build/outputs/apk/release/app-release-signed.apk
 
-      - name: Upload Signed APK
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: writerstm-signed-apk
