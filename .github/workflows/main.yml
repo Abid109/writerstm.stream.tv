@@ -29,6 +29,139 @@ jobs:
         run: |
           yes | sdkmanager --licenses || true
 
+      - name: Generate Android Project
+        run: |
+          mkdir -p android/app/src/main/java/com/writerstm/stream
+          mkdir -p android/app/src/main/assets
+          mkdir -p android/app/src/main/res/values
+          
+          cp index.html android/app/src/main/assets/index.html
+          
+          cat > android/app/src/main/java/com/writerstm/stream/MainActivity.java << 'JAVAEOF'
+          package com.writerstm.stream;
+          import android.app.Activity;
+          import android.os.Bundle;
+          import android.view.Window;
+          import android.view.WindowManager;
+          import android.webkit.WebChromeClient;
+          import android.webkit.WebSettings;
+          import android.webkit.WebView;
+          import android.webkit.WebViewClient;
+          public class MainActivity extends Activity {
+              private WebView webView;
+              @Override
+              protected void onCreate(Bundle savedInstanceState) {
+                  super.onCreate(savedInstanceState);
+                  requestWindowFeature(Window.FEATURE_NO_TITLE);
+                  getWindow().setFlags(
+                      WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                      WindowManager.LayoutParams.FLAG_FULLSCREEN
+                  );
+                  getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                  webView = new WebView(this);
+                  setContentView(webView);
+                  WebSettings settings = webView.getSettings();
+                  settings.setJavaScriptEnabled(true);
+                  settings.setDomStorageEnabled(true);
+                  settings.setDatabaseEnabled(true);
+                  settings.setMediaPlaybackRequiresUserGesture(false);
+                  settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+                  webView.setWebChromeClient(new WebChromeClient());
+                  webView.setWebViewClient(new WebViewClient());
+                  webView.loadUrl("file:///android_asset/index.html");
+              }
+              @Override
+              public void onBackPressed() {
+                  if (webView.canGoBack()) {
+                      webView.goBack();
+                  } else {
+                      super.onBackPressed();
+                  }
+              }
+          }
+          JAVAEOF
+          
+          cat > android/app/src/main/AndroidManifest.xml << 'XMLEOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+              package="com.writerstm.stream">
+              <uses-permission android:name="android.permission.INTERNET" />
+              <application
+                  android:allowBackup="true"
+                  android:label="Writerstm.stream"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+                  <activity
+                      android:name=".MainActivity"
+                      android:configChanges="orientation|screenSize"
+                      android:exported="true">
+                      <intent-filter>
+                          <action android:name="android.intent.action.MAIN" />
+                          <category android:name="android.intent.category.LAUNCHER" />
+                      </intent-filter>
+                  </activity>
+              </application>
+          </manifest>
+          XMLEOF
+          
+          cat > android/app/src/main/res/values/strings.xml << 'XMLEOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <resources>
+              <string name="app_name">Writerstm.stream</string>
+          </resources>
+          XMLEOF
+          
+          cat > android/app/build.gradle << 'GRADLEEOF'
+          apply plugin: 'com.android.application'
+          android {
+              namespace 'com.writerstm.stream'
+              compileSdk 33
+              defaultConfig {
+                  applicationId "com.writerstm.stream"
+                  minSdk 19
+                  targetSdk 33
+                  versionCode 1
+                  versionName "1.0"
+              }
+              buildTypes {
+                  release {
+                      minifyEnabled false
+                  }
+              }
+              compileOptions {
+                  sourceCompatibility JavaVersion.VERSION_1_8
+                  targetCompatibility JavaVersion.VERSION_1_8
+              }
+          }
+          GRADLEEOF
+          
+          cat > android/build.gradle << 'GRADLEEOF'
+          buildscript {
+              repositories {
+                  google()
+                  mavenCentral()
+              }
+              dependencies {
+                  classpath 'com.android.tools.build:gradle:8.1.0'
+              }
+          }
+          allprojects {
+              repositories {
+                  google()
+                  mavenCentral()
+              }
+          }
+          GRADLEEOF
+          
+          cat > android/settings.gradle << 'GRADLEEOF'
+          rootProject.name = "WriterstmStream"
+          include ':app'
+          GRADLEEOF
+          
+          cat > android/gradle.properties << 'GRADLEEOF'
+          org.gradle.jvmargs=-Xmx4096m
+          android.useAndroidX=true
+          GRADLEEOF
+
       - name: Install Gradle
         run: |
           wget https://services.gradle.org/distributions/gradle-8.0-bin.zip -O gradle.zip
