@@ -32,15 +32,12 @@ jobs:
         run: |
           yes | sdkmanager --licenses || true
 
-      - name: Setup Gradle
+      - name: Build APK
         uses: gradle/gradle-build-action@v3
         with:
           gradle-version: '8.0'
-
-      - name: Build APK
-        run: |
-          cd android
-          gradle assembleRelease --stacktrace
+          arguments: assembleRelease
+          build-root-directory: android
 
       - name: Sign APK with debug key
         run: |
