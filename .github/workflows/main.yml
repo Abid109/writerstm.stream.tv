@@ -3,8 +3,6 @@ name: Build Android APK
 on:
   push:
     branches: [main, master]
-  pull_request:
-    branches: [main, master]
   workflow_dispatch:
 
 jobs:
@@ -20,7 +18,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
@@ -32,12 +29,18 @@ jobs:
         run: |
           yes | sdkmanager --licenses || true
 
+      - name: Install Gradle 8.0
+        run: |
+          wget https://services.gradle.org/distributions/gradle-8.0-bin.zip -O gradle.zip
+          unzip -q gradle.zip
+          sudo mv gradle-8.0 /opt/gradle
+          sudo ln -sf /opt/gradle/bin/gradle /usr/local/bin/gradle
+          gradle --version
+
       - name: Build APK
-        uses: gradle/gradle-build-action@v3
-        with:
-          gradle-version: '8.0'
-          arguments: assembleRelease
-          build-root-directory: android
+        run: |
+          cd android
+          gradle assembleRelease --stacktrace
 
       - name: Sign APK with debug key
         run: |
@@ -54,17 +57,3 @@ jobs:
           name: writerstm-signed-apk
           path: android/app/build/outputs/apk/release/app-release-signed.apk
           retention-days: 30
-
-      - name: Create Release
-        if: github.ref == 'refs/heads/main'
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ github.run_number }}
-          name: Release v${{ github.run_number }}
-          body: |
-            Writerstm.stream Android TV APK
-            - Auto-built from commit ${{ github.sha }}
-          files: |
-            android/app/build/outputs/apk/release/app-release-signed.apk
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
