@@ -1,0 +1,2701 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Writerstm Stream TV</title>
+    <meta name="description" content="Ultra-compatible streaming app for movies, TV series, anime, and public domain cinema, optimized for vintage smart TVs and legacy browsers with vanilla ES5 and CSS styling." />
+    <meta property="og:title" content="Writerstm Stream TV" />
+    <meta property="og:description" content="Ultra-compatible streaming app for movies, TV series, anime, and public domain cinema, optimized for vintage smart TVs and legacy browsers with vanilla ES5 and CSS styling." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <!-- Legacy-compatible styling (Zero CSS variables or modern features required) -->
+    <style>
+/* ==========================================================================
+   Writerstm Stream TV - 10-Foot UI & Legacy TV Screen Compatible CSS
+   Compatible with: WebKit 534+, Opera Presto TV, Tizen 2+, webOS 1+, Android 4+
+   Zero CSS Houdini, Zero CSS Grid requirements, Full standard CSS fallbacks
+   ========================================================================== */
+
+/* Reset & Box Sizing */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #0d0d11;
+  color: #f0f0f5;
+  font-family: Arial, Helvetica, "Trebuchet MS", "DejaVu Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* TV Focus Highlights - High Contrast Golden / Zero-Lag Outline */
+a, button, input, select, .tv-card, .tv-btn, .tv-tab, .tv-chip {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+:focus,
+.tv-focused {
+  outline: 3px solid #ffcc00 !important;
+  outline-offset: 1px !important;
+  border-color: #ffcc00 !important;
+  background-color: #2b2b3d !important;
+  color: #ffffff !important;
+  z-index: 10 !important;
+}
+
+/* App Header & Top Navigation */
+#tv-header {
+  width: 100%;
+  background-color: #14141c;
+  border-bottom: 2px solid #232330;
+  padding: 12px 24px;
+  position: relative;
+  z-index: 40;
+}
+
+.tv-header-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.tv-brand {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 25px;
+}
+
+.tv-logo-badge {
+  display: inline-block;
+  background-color: #e50914;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tv-brand-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff;
+  vertical-align: middle;
+  letter-spacing: -0.5px;
+}
+
+.tv-brand-subtitle {
+  font-size: 11px;
+  color: #e50914;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+}
+
+/* Nav Tabs */
+.tv-nav-tabs {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.tv-tab {
+  display: inline-block;
+  padding: 8px 18px;
+  margin-right: 6px;
+  background-color: #1c1c28;
+  color: #a0a0b2;
+  border: 2px solid #29293a;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.tv-tab:hover {
+  background-color: #2a2a3d;
+  color: #ffffff;
+}
+
+.tv-tab.active {
+  background-color: #e50914;
+  color: #ffffff;
+  border-color: #ff3b47;
+}
+
+/* Search Bar in Header */
+.tv-search-box {
+  display: inline-block;
+  vertical-align: middle;
+  float: right;
+  margin-top: 2px;
+}
+
+.tv-search-input {
+  background-color: #1b1b24;
+  color: #ffffff;
+  border: 2px solid #323246;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  width: 240px;
+  outline: none;
+}
+
+.tv-search-input:focus {
+  border-color: #ffcc00;
+  width: 320px;
+}
+
+.tv-btn-clear {
+  background-color: #333346;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 6px 12px;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+/* Filter Sub-bar */
+#tv-filter-bar {
+  background-color: #101017;
+  border-bottom: 1px solid #1e1e2c;
+  padding: 10px 24px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.tv-filter-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.tv-section-label {
+  display: inline-block;
+  color: #88889c;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+.tv-chip {
+  display: inline-block;
+  padding: 6px 14px;
+  margin-right: 8px;
+  background-color: #1a1a24;
+  color: #a5a5bb;
+  border: 1px solid #282836;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.tv-chip:hover {
+  background-color: #262638;
+  color: #ffffff;
+}
+
+.tv-chip.active {
+  background-color: #e50914;
+  color: #ffffff;
+  border-color: #e50914;
+}
+
+.tv-chip.genre-active {
+  background-color: #ffcc00;
+  color: #000000;
+  border-color: #ffcc00;
+  font-weight: bold;
+}
+
+/* Genre Dropdown for Old TVs */
+.tv-genre-select {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #1a1a26;
+  color: #ffffff;
+  border: 2px solid #33334d;
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+
+/* Main Container */
+#tv-main {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px 24px 80px 24px;
+}
+
+/* TV Hero / Featured Spotlight Banner */
+#tv-spotlight {
+  width: 100%;
+  background-color: #171722;
+  border: 2px solid #2c2c3e;
+  border-radius: 16px;
+  padding: 24px 30px;
+  margin-bottom: 25px;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.tv-spotlight-content {
+  position: relative;
+  z-index: 2;
+  max-width: 750px;
+}
+
+.tv-spotlight-badge {
+  display: inline-block;
+  background-color: #e50914;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.tv-spotlight-rating {
+  display: inline-block;
+  background-color: #000000;
+  color: #ffd700;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-left: 8px;
+  border: 1px solid #333333;
+}
+
+.tv-spotlight-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  text-shadow: 2px 2px 6px #000000;
+}
+
+.tv-spotlight-desc {
+  font-size: 15px;
+  color: #cccccc;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  max-height: 70px;
+  overflow: hidden;
+  text-shadow: 1px 1px 4px #000000;
+}
+
+.tv-btn {
+  display: inline-block;
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  text-decoration: none;
+  margin-right: 12px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.tv-btn-primary {
+  background-color: #e50914;
+  color: #ffffff;
+}
+
+.tv-btn-primary:hover {
+  background-color: #ff1f2d;
+}
+
+.tv-btn-secondary {
+  background-color: #232332;
+  color: #e0e0e0;
+  border-color: #38384e;
+}
+
+.tv-btn-secondary:hover {
+  background-color: #333348;
+  color: #ffffff;
+}
+
+/* Grid & Cards (Compatible with all old TV layout engines) */
+.tv-grid {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.tv-card {
+  display: inline-block;
+  vertical-align: top;
+  width: 15.6%;
+  margin: 0 0.5% 20px 0.5%;
+  background-color: #171722;
+  border: 2px solid #252535;
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Responsive grid for lower-res 720p/480p TVs */
+@media screen and (max-width: 1200px) {
+  .tv-card { width: 19%; }
+}
+@media screen and (max-width: 900px) {
+  .tv-card { width: 24%; }
+}
+@media screen and (max-width: 650px) {
+  .tv-card { width: 32%; }
+}
+@media screen and (max-width: 480px) {
+  .tv-card { width: 48%; }
+}
+
+.tv-poster-wrap {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 148%;
+  background-color: #1c1c28;
+  overflow: hidden;
+}
+
+.tv-poster-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+}
+
+.tv-card-badge-type {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #333344;
+  text-transform: uppercase;
+}
+
+.tv-card-badge-rating {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #ffd700;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #333344;
+}
+
+.tv-card-info {
+  padding: 10px;
+}
+
+.tv-card-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #f5f5f5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tv-card-meta {
+  font-size: 12px;
+  color: #8c8ca0;
+  margin-top: 4px;
+}
+
+/* Section Title */
+.tv-section-header {
+  margin: 20px 0 12px 0;
+  padding: 0 4px;
+}
+
+.tv-section-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  display: inline-block;
+  letter-spacing: -0.3px;
+}
+
+.tv-section-desc {
+  font-size: 13px;
+  color: #8a8aa2;
+  margin-left: 12px;
+  display: inline-block;
+}
+
+/* Quick Search Suggestions Bar for TV Remote Users */
+.tv-quick-search-bar {
+  margin-top: 10px;
+  padding: 6px 0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.tv-quick-search-label {
+  display: inline-block;
+  color: #7b7b92;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-right: 8px;
+}
+
+.tv-quick-tag {
+  display: inline-block;
+  background-color: #191924;
+  color: #a0a0b8;
+  border: 1px solid #28283a;
+  border-radius: 12px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 6px;
+  text-decoration: none;
+}
+
+.tv-quick-tag:hover {
+  background-color: #262638;
+  color: #ffffff;
+}
+
+/* Pagination Bar */
+.tv-pagination {
+  text-align: center;
+  margin: 30px 0;
+  padding: 15px;
+}
+
+.tv-page-indicator {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: bold;
+  color: #a0a0b4;
+  margin: 0 15px;
+  vertical-align: middle;
+}
+
+/* Bottom Remote Control Key Guide Bar */
+#tv-remote-guide {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #0b0b10;
+  border-top: 2px solid #222230;
+  padding: 8px 16px;
+  z-index: 100;
+  font-size: 12px;
+  color: #8e8ea6;
+  text-align: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.tv-key-hint {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.tv-key-badge {
+  display: inline-block;
+  background-color: #232332;
+  color: #ffcc00;
+  border: 1px solid #44445a;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-weight: bold;
+  font-family: monospace;
+  margin-right: 4px;
+}
+
+/* Modals: Player & Details Screen */
+.tv-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  overflow-y: auto;
+  display: none;
+}
+
+.tv-modal-backdrop.open {
+  display: block;
+}
+
+/* Details Modal Panel */
+#tv-info-modal .tv-modal-panel {
+  max-width: 1200px;
+  margin: 20px auto;
+  background-color: #14141d;
+  border: 3px solid #2d2d3e;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Player Modal - 100% Fullscreen on TVs and APKs */
+#tv-player-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #000000;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+#tv-player-modal .tv-modal-panel {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background-color: #000000;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.tv-modal-header {
+  background-color: #111118;
+  padding: 10px 16px;
+  border-bottom: 2px solid #222230;
+  position: relative;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.tv-modal-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 55%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tv-modal-actions {
+  float: right;
+}
+
+.tv-modal-ctrl-btn {
+  display: inline-block;
+  background-color: #262638;
+  color: #ffffff;
+  border: 1px solid #44445c;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 8px;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.tv-modal-ctrl-btn:hover {
+  background-color: #383850;
+}
+
+.tv-modal-close-btn {
+  background-color: #e50914 !important;
+  color: #ffffff !important;
+  border: none !important;
+}
+
+/* Video Stage - Dynamically fills entire TV / APK screen */
+.tv-player-stage {
+  width: 100%;
+  height: calc(100vh - 120px);
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  background-color: #000000;
+  position: relative;
+}
+
+/* Pure Cinema Mode (Hides headers for 100% edge-to-edge screen fill) */
+#tv-player-modal.cinema-mode .tv-modal-header,
+#tv-player-modal.cinema-mode .tv-server-bar,
+#tv-player-modal.cinema-mode .tv-episodes-section,
+#tv-player-modal.cinema-mode .tv-ext-bar {
+  display: none !important;
+}
+
+#tv-player-modal.cinema-mode .tv-player-stage {
+  height: 100vh !important;
+}
+
+.tv-player-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background-color: #000000;
+}
+
+.tv-player-video {
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  display: block;
+}
+
+/* Server Selector Row */
+.tv-server-bar {
+  background-color: #111119;
+  padding: 8px 16px;
+  border-bottom: 1px solid #20202e;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.tv-server-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  color: #8e8ea6;
+  margin-right: 10px;
+  text-transform: uppercase;
+}
+
+.tv-server-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-right: 6px;
+  background-color: #212130;
+  color: #bbbbcf;
+  border: 1px solid #333348;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.tv-server-btn.active {
+  background-color: #e50914;
+  color: #ffffff;
+  border-color: #ff3340;
+}
+
+/* Season & Episode Bar */
+.tv-episodes-section {
+  padding: 18px 20px;
+  background-color: #12121a;
+  border-top: 1px solid #222232;
+}
+
+.tv-season-select {
+  background-color: #20202e;
+  color: #ffffff;
+  border: 2px solid #36364d;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.tv-episodes-grid {
+  max-height: 160px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.tv-ep-btn {
+  display: inline-block;
+  width: 90px;
+  margin: 4px 6px 4px 0;
+  padding: 8px 6px;
+  background-color: #1d1d2b;
+  border: 1px solid #2e2e42;
+  border-radius: 6px;
+  color: #c4c4d8;
+  font-size: 13px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.tv-ep-btn.active {
+  background-color: #e50914;
+  color: #ffffff;
+  border-color: #e50914;
+}
+
+/* External Link & 1DM Row */
+.tv-ext-bar {
+  padding: 12px 20px;
+  background-color: #161622;
+  border-top: 1px solid #222233;
+}
+
+.tv-ext-link {
+  display: inline-block;
+  background-color: #0088cc;
+  color: #ffffff;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.tv-ext-link:hover {
+  background-color: #0099e6;
+}
+
+/* Details Modal Specifics */
+.tv-details-grid {
+  padding: 24px;
+}
+
+.tv-details-poster {
+  float: left;
+  width: 220px;
+  margin-right: 25px;
+  border-radius: 10px;
+  border: 2px solid #333346;
+}
+
+.tv-details-info {
+  overflow: hidden;
+}
+
+.tv-details-synopsis {
+  font-size: 15px;
+  color: #dddddd;
+  line-height: 1.6;
+  margin: 15px 0;
+}
+
+.tv-meta-row {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #9a9ab0;
+}
+
+.tv-meta-row strong {
+  color: #ffffff;
+}
+
+/* Toast Message */
+#tv-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  background-color: #e50914;
+  color: #ffffff;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: none;
+}
+
+/* Empty State / Loading State */
+.tv-state-panel {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.tv-spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid #333344;
+  border-top-color: #e50914;
+  border-radius: 50%;
+  -webkit-animation: tv-spin 0.8s linear infinite;
+  animation: tv-spin 0.8s linear infinite;
+  margin-bottom: 15px;
+}
+
+@-webkit-keyframes tv-spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes tv-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+</style>
+  </head>
+  <body>
+    <!-- App Header & Navigation -->
+    <div id="tv-header">
+      <div class="tv-header-inner clearfix">
+        <div class="tv-brand">
+          <span class="tv-logo-badge">TV</span>
+          <span class="tv-brand-title">Writerstm</span>
+          <span class="tv-brand-subtitle">Stream TV Edition</span>
+        </div>
+
+        <div class="tv-nav-tabs" id="tv-nav-tabs">
+          <!-- Populated by ES5 engine -->
+        </div>
+
+        <div class="tv-search-box">
+          <input type="text" id="tv-search-input" class="tv-search-input" placeholder="Search title or actor [ENTER]..." tabindex="0" />
+          <button type="button" id="btn-search-clear" class="tv-btn-clear" tabindex="0">&#10005; Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter & Genre Sub-bar -->
+    <div id="tv-filter-bar">
+      <!-- Populated by ES5 engine -->
+    </div>
+
+    <!-- Quick Search Bar for TV Remote (Zero Typing Required) -->
+    <div class="tv-quick-search-bar" id="tv-quick-search-bar" style="background-color:#111119; padding:6px 24px; border-bottom:1px solid #1a1a26;">
+      <div style="max-width:1600px; margin:0 auto; overflow-x:auto; white-space:nowrap;">
+        <span class="tv-quick-search-label">Quick Search:</span>
+        <button type="button" class="tv-quick-tag" tabindex="0" data-quick="Action">Action</button>
+        <button type="button" class="tv-quick-tag" tabindex="0" data-quick="Comedy">Comedy</button>
+        <button type="button" class="tv-quick-tag" tabindex="0" data-quick="Horror">Horror</button>
+        <button type="button" class="tv-quick-tag" tabindex="0" data-quick="Marvel">Marvel</button>
+        <button type="button" class="tv-quick-tag" tabindex="0" data-quick="Batman">Batman</button>
+        <button type="button" class="tv-quick-tag" tabindex="0" data-quick="Star Wars">Star Wars</button>
+        <button type="button" class="tv-quick-tag" tabindex="0" data-quick="Anime">Anime</button>
+        <button type="button" class="tv-quick-tag" tabindex="0" data-quick="Sherlock Holmes">Sherlock</button>
+        <button type="button" class="tv-quick-tag" tabindex="0" data-quick="Charlie Chaplin">Chaplin</button>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div id="tv-main">
+      <!-- Featured Spotlight Media Banner -->
+      <div id="tv-spotlight" style="display:none;"></div>
+
+      <!-- Continue Watching Row -->
+      <div id="tv-history-section" style="display:none;"></div>
+
+      <!-- Media Grid -->
+      <div class="tv-section-header">
+        <span class="tv-section-title" id="tv-grid-heading">Cinema &amp; Series Streams</span>
+        <span class="tv-section-desc">Compatible with standard TV Remote D-Pad</span>
+      </div>
+      <div id="tv-grid" class="tv-grid">
+        <!-- Rendered by ES5 script -->
+      </div>
+
+      <!-- Pagination -->
+      <div id="tv-pagination" class="tv-pagination" style="display:none;"></div>
+    </div>
+
+    <!-- TV Remote Control D-Pad Key Guide Footer -->
+    <div id="tv-remote-guide">
+      <span class="tv-key-hint"><span class="tv-key-badge">&#9650; &#9660; &#9664; &#9654;</span> D-Pad Navigate</span>
+      <span class="tv-key-hint"><span class="tv-key-badge">OK / ENTER</span> Select / Play</span>
+      <span class="tv-key-hint"><span class="tv-key-badge">BACK / ESC</span> Return / Close</span>
+      <span class="tv-key-hint"><span class="tv-key-badge">CLICK / TOUCH</span> Supported</span>
+    </div>
+
+    <!-- Video Player Modal (100% Fullscreen on TVs and APKs) -->
+    <div id="tv-player-modal" class="tv-modal-backdrop">
+      <div class="tv-modal-panel">
+        <div class="tv-modal-header clearfix">
+          <h2 class="tv-modal-title" id="tv-player-modal-title">Streaming Video Player</h2>
+          <div class="tv-modal-actions">
+            <button type="button" class="tv-modal-ctrl-btn" id="btn-focus-player" tabindex="0" title="Control video with remote OK">&#9658; Focus Video [OK]</button>
+            <button type="button" class="tv-modal-ctrl-btn" id="btn-fullscreen-player" tabindex="0" title="Full screen cinema mode">&#x26F6; Full Screen</button>
+            <button type="button" class="tv-modal-ctrl-btn tv-modal-close-btn" id="btn-close-player" tabindex="0">&#10005; Close [BACK]</button>
+          </div>
+        </div>
+        
+        <!-- Multi-Server Selector -->
+        <div class="tv-server-bar" id="tv-player-servers"></div>
+
+        <!-- Video Player Stage (Expands to fill 100% viewport) -->
+        <div class="tv-player-stage" id="tv-player-stage"></div>
+
+        <!-- TV Episodes Drawer -->
+        <div class="tv-episodes-section" id="tv-player-episodes" style="display:none;"></div>
+
+        <!-- External Player / 1DM launcher -->
+        <div class="tv-ext-bar" id="tv-player-ext-bar"></div>
+      </div>
+    </div>
+
+    <!-- Details / Information Modal -->
+    <div id="tv-info-modal" class="tv-modal-backdrop">
+      <div class="tv-modal-panel" style="max-width:900px;">
+        <div class="tv-modal-header clearfix">
+          <h2 class="tv-modal-title" id="tv-info-modal-title">Media Overview</h2>
+          <button type="button" class="tv-modal-close-btn" id="btn-close-info" tabindex="0">&#10005; CLOSE [BACK]</button>
+        </div>
+        <div id="tv-info-modal-body"></div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="tv-toast"></div>
+
+    <!-- Pure Vanilla ES5 Application Engine -->
+    <script>
+/**
+ * Writerstm Stream TV - Pure Vanilla ES5 Application Engine
+ * Compatible with vintage Smart TVs (webOS 1.x, Tizen 2.x, Opera TV, NetCast, Android 4.x, WebKit 534+)
+ * Strict ES5: No const/let, no arrow functions, no template literals, no fetch/async/await.
+ */
+
+(function () {
+  "use strict";
+
+  // --- Polyfills for Older TV Engines ---
+  if (!Array.prototype.forEach) {
+    Array.prototype.forEach = function (callback, thisArg) {
+      for (var i = 0; i < this.length; i++) {
+        if (i in this) callback.call(thisArg, this[i], i, this);
+      }
+    };
+  }
+
+  if (!Array.prototype.map) {
+    Array.prototype.map = function (callback, thisArg) {
+      var res = [];
+      for (var i = 0; i < this.length; i++) {
+        if (i in this) res.push(callback.call(thisArg, this[i], i, this));
+      }
+      return res;
+    };
+  }
+
+  if (!Array.prototype.filter) {
+    Array.prototype.filter = function (callback, thisArg) {
+      var res = [];
+      for (var i = 0; i < this.length; i++) {
+        if (i in this && callback.call(thisArg, this[i], i, this)) {
+          res.push(this[i]);
+        }
+      }
+      return res;
+    };
+  }
+
+  if (!Array.prototype.indexOf) {
+    Array.prototype.indexOf = function (searchElement, fromIndex) {
+      var k = fromIndex ? fromIndex : 0;
+      if (k < 0) k = Math.max(0, this.length + k);
+      for (; k < this.length; k++) {
+        if (k in this && this[k] === searchElement) return k;
+      }
+      return -1;
+    };
+  }
+
+  if (!String.prototype.trim) {
+    String.prototype.trim = function () {
+      return this.replace(/^\s+|\s+$/g, "");
+    };
+  }
+
+  if (!Object.keys) {
+    Object.keys = function (obj) {
+      var keys = [];
+      for (var prop in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+          keys.push(prop);
+        }
+      }
+      return keys;
+    };
+  }
+
+  // --- Global State ---
+  var TMDB_KEY = "3fd2be6f0c70a2a598f084ddfb75487c";
+  var WATCHLIST_STORAGE_KEY = "writerstm_tv_watchlist";
+  var HISTORY_STORAGE_KEY = "writerstm_tv_history";
+  var SERVER_STORAGE_KEY = "writerstm_tv_server";
+
+  var SERVERS_LIST = [
+    { id: "vidlink", name: "Server 1 (AutoPlay / Fast)" },
+    { id: "vidsrc_to", name: "Server 2 (VidSrc To)" },
+    { id: "embedsu", name: "Server 3 (Embed.su PRO)" },
+    { id: "autoembed", name: "Server 4 (AutoEmbed)" },
+    { id: "vidsrc_me", name: "Server 5 (VidSrc Fast)" },
+    { id: "vidbinge", name: "Server 6 (VidBinge Anime)" },
+    { id: "smashy", name: "Server 7 (SmashyStream)" },
+    { id: "2embed", name: "Server 8 (2Embed)" },
+    { id: "movieapi", name: "Server 9 (MovieAPI)" }
+  ];
+
+  var state = {
+    currentTab: "home", // home, movie, tv, anime, archive, watchlist
+    currentCategory: "trending", // trending, popular, top_rated
+    currentGenre: "",
+    searchQuery: "",
+    currentPage: 1,
+    totalPages: 1,
+    items: [],
+    spotlightItem: null,
+    history: [],
+    watchlist: [],
+    isLoading: false,
+
+    // Player State
+    currentPlaying: null,
+    currentServer: "vidlink",
+    currentSeason: 1,
+    currentEpisode: 1,
+    seasonsList: [],
+    episodesList: [],
+    archiveDirectUrl: null,
+
+    // Info Modal State
+    infoItem: null
+  };
+
+  // Safe LocalStorage helpers
+  function getStorage(key, fallback) {
+    try {
+      var val = localStorage.getItem(key);
+      return val ? JSON.parse(val) : fallback;
+    } catch (e) {
+      return fallback;
+    }
+  }
+
+  function setStorage(key, val) {
+    try {
+      localStorage.setItem(key, JSON.stringify(val));
+    } catch (e) {}
+  }
+
+  state.watchlist = getStorage(WATCHLIST_STORAGE_KEY, []);
+  state.history = getStorage(HISTORY_STORAGE_KEY, []);
+  state.currentServer = getStorage(SERVER_STORAGE_KEY, "vidlink");
+
+  // --- Reliable XHR Helper (Replaces Fetch/Async) ---
+  function ajaxGet(url, successCallback, errorCallback) {
+    var xhr;
+    if (window.XMLHttpRequest) {
+      xhr = new XMLHttpRequest();
+    } else {
+      try {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+      } catch (e) {
+        xhr = null;
+      }
+    }
+
+    if (!xhr) {
+      if (errorCallback) errorCallback(new Error("XHR not available"));
+      return;
+    }
+
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          var data = null;
+          try {
+            data = JSON.parse(xhr.responseText);
+          } catch (err) {
+            data = xhr.responseText;
+          }
+          if (successCallback) successCallback(data);
+        } else {
+          if (errorCallback) errorCallback(new Error("HTTP " + xhr.status));
+        }
+      }
+    };
+    xhr.onerror = function () {
+      if (errorCallback) errorCallback(new Error("Network Error"));
+    };
+    try {
+      xhr.send();
+    } catch (err) {
+      if (errorCallback) errorCallback(err);
+    }
+  }
+
+  // Toast Notification
+  var toastTimer = null;
+  function showToast(message) {
+    var toast = document.getElementById("tv-toast");
+    if (!toast) return;
+    toast.innerHTML = message;
+    toast.style.display = "block";
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      toast.style.display = "none";
+    }, 2800);
+  }
+
+  // --- Genres Definition ---
+  var GENRES_MAP = {
+    home: [
+      { id: "28", name: "Action" },
+      { id: "12", name: "Adventure" },
+      { id: "16", name: "Animation" },
+      { id: "35", name: "Comedy" },
+      { id: "80", name: "Crime" },
+      { id: "18", name: "Drama" },
+      { id: "14", name: "Fantasy" },
+      { id: "27", name: "Horror" },
+      { id: "878", name: "Sci-Fi" },
+      { id: "53", name: "Thriller" }
+    ],
+    movie: [
+      { id: "28", name: "Action" },
+      { id: "12", name: "Adventure" },
+      { id: "16", name: "Animation" },
+      { id: "35", name: "Comedy" },
+      { id: "80", name: "Crime" },
+      { id: "18", name: "Drama" },
+      { id: "14", name: "Fantasy" },
+      { id: "27", name: "Horror" },
+      { id: "878", name: "Sci-Fi" },
+      { id: "53", name: "Thriller" }
+    ],
+    tv: [
+      { id: "10759", name: "Action & Adventure" },
+      { id: "16", name: "Animation" },
+      { id: "35", name: "Comedy" },
+      { id: "80", name: "Crime" },
+      { id: "18", name: "Drama" },
+      { id: "10765", name: "Sci-Fi & Fantasy" },
+      { id: "9648", name: "Mystery" }
+    ],
+    anime: [
+      { id: "10759", name: "Action & Adventure" },
+      { id: "35", name: "Comedy" },
+      { id: "18", name: "Drama" },
+      { id: "10765", name: "Sci-Fi & Fantasy" },
+      { id: "9648", name: "Mystery" },
+      { id: "10762", name: "Kids & Family" }
+    ],
+    archive: [
+      { id: "collection:PublicDomainFilms", name: "Public Domain Films" },
+      { id: "collection:feature_films", name: "Feature Films" },
+      { id: "collection:classic_tv", name: "Classic TV" },
+      { id: "collection:SciFi_Horror", name: "Sci-Fi & Horror" },
+      { id: "collection:Comedy_Films", name: "Comedy" },
+      { id: "collection:silent_films", name: "Silent Films" }
+    ]
+  };
+
+  // --- Fetch Media Function ---
+  function fetchMedia(callback) {
+    state.isLoading = true;
+    renderGrid();
+
+    var tab = state.currentTab;
+    var cat = state.currentCategory;
+    var genre = state.currentGenre;
+    var query = state.searchQuery;
+    var page = state.currentPage;
+
+    // Update section header
+    var headerEl = document.getElementById("tv-grid-heading");
+    if (headerEl) {
+      if (query) {
+        headerEl.innerHTML = 'Search Results for "' + escapeHtml(query) + '"';
+      } else if (tab === "watchlist") {
+        headerEl.innerHTML = "My Saved Watchlist (" + state.watchlist.length + ")";
+      } else if (tab === "movie") {
+        headerEl.innerHTML = "Movies &bull; " + (cat === "top_rated" ? "Top Rated" : (cat === "popular" ? "Most Popular" : "Trending"));
+      } else if (tab === "tv") {
+        headerEl.innerHTML = "TV Shows &bull; " + (cat === "top_rated" ? "Top Rated" : (cat === "popular" ? "Most Popular" : "Trending"));
+      } else if (tab === "anime") {
+        headerEl.innerHTML = "Anime Series &bull; Japanese Animation";
+      } else if (tab === "archive") {
+        headerEl.innerHTML = "Public Domain &bull; Internet Archive Cinema";
+      } else {
+        headerEl.innerHTML = "Featured Cinema &amp; Series Streams";
+      }
+    }
+
+    if (tab === "watchlist") {
+      state.items = state.watchlist.slice();
+      state.totalPages = 1;
+      state.isLoading = false;
+      if (state.items.length > 0) {
+        state.spotlightItem = state.items[0];
+      }
+      renderSpotlight();
+      renderGrid();
+      if (callback) callback();
+      return;
+    }
+
+    if (tab === "archive") {
+      var qStr = query || "mediatype:movies AND collection:(feature_films OR PublicDomainFilms)";
+      if (genre) qStr += " AND " + genre;
+      var archUrl = "https://archive.org/advancedsearch.php?q=" + encodeURIComponent(qStr) +
+        "&fl[]=identifier&fl[]=title&fl[]=year&fl[]=description&rows=16&page=" + page + "&output=json";
+
+      ajaxGet(archUrl, function (res) {
+        var docs = (res && res.response && res.response.docs) ? res.response.docs : [];
+        var numFound = (res && res.response && res.response.numFound) ? res.response.numFound : 0;
+        state.totalPages = Math.min(Math.ceil(numFound / 16) || 1, 100);
+        state.items = [];
+        for (var i = 0; i < docs.length; i++) {
+          var item = docs[i];
+          state.items.push({
+            id: item.identifier,
+            type: "archive",
+            title: item.title || "Untitled Archive Film",
+            poster: "https://archive.org/services/img/" + item.identifier,
+            backdrop: "https://archive.org/services/img/" + item.identifier,
+            overview: item.description || "Public domain historical cinema preserved by the Internet Archive.",
+            year: item.year ? String(item.year) : "Classic",
+            rating: "N/A"
+          });
+        }
+        state.isLoading = false;
+        if (state.items.length > 0 && !state.searchQuery) {
+          state.spotlightItem = state.items[0];
+        }
+        renderSpotlight();
+        renderGrid();
+        if (callback) callback();
+      }, function (err) {
+        state.isLoading = false;
+        state.items = [];
+        renderGrid();
+        if (callback) callback();
+      });
+      return;
+    }
+
+    if (tab === "anime") {
+      var animeUrl = "";
+      if (query) {
+        animeUrl = "https://api.themoviedb.org/3/search/tv?api_key=" + TMDB_KEY +
+          "&query=" + encodeURIComponent(query) + "&page=" + page;
+      } else {
+        var sortAnime = cat === "top_rated" ? "vote_average.desc&vote_count.gte=100" : "popularity.desc";
+        var animeGenre = genre ? "16," + genre : "16";
+        animeUrl = "https://api.themoviedb.org/3/discover/tv?api_key=" + TMDB_KEY +
+          "&with_genres=" + animeGenre + "&with_original_language=ja&sort_by=" + sortAnime + "&page=" + page;
+      }
+
+      ajaxGet(animeUrl, function (res) {
+        var results = (res && res.results) ? res.results : [];
+        state.totalPages = Math.min((res && res.total_pages) ? res.total_pages : 1, 500);
+        state.items = [];
+        for (var i = 0; i < results.length; i++) {
+          var aItem = results[i];
+          if (aItem.poster_path || aItem.backdrop_path) {
+            state.items.push({
+              id: aItem.id,
+              type: "anime",
+              title: aItem.name || aItem.original_name || aItem.title || "Anime Series",
+              poster: aItem.poster_path ? "https://image.tmdb.org/t/p/w342" + aItem.poster_path : "",
+              backdrop: aItem.backdrop_path ? "https://image.tmdb.org/t/p/w780" + aItem.backdrop_path : "",
+              overview: aItem.overview || "Anime television series.",
+              year: (aItem.first_air_date || aItem.release_date || "N/A").split("-")[0],
+              rating: aItem.vote_average ? aItem.vote_average.toFixed(1) : "N/A"
+            });
+          }
+        }
+        state.isLoading = false;
+        if (state.items.length > 0 && !state.searchQuery) {
+          state.spotlightItem = state.items[0];
+        }
+        renderSpotlight();
+        renderGrid();
+        if (callback) callback();
+      }, function () {
+        state.isLoading = false;
+        renderGrid();
+      });
+      return;
+    }
+
+    if (tab === "home") {
+      var homeUrl = "";
+      if (query) {
+        homeUrl = "https://api.themoviedb.org/3/search/multi?api_key=" + TMDB_KEY +
+          "&query=" + encodeURIComponent(query) + "&page=" + page;
+      } else {
+        var timeWindow = cat === "trending" ? "week" : "day";
+        homeUrl = "https://api.themoviedb.org/3/trending/all/" + timeWindow + "?api_key=" + TMDB_KEY + "&page=" + page;
+      }
+
+      ajaxGet(homeUrl, function (res) {
+        var results = (res && res.results) ? res.results : [];
+        state.totalPages = Math.min((res && res.total_pages) ? res.total_pages : 1, 500);
+        state.items = [];
+        for (var i = 0; i < results.length; i++) {
+          var hItem = results[i];
+          var mediaType = hItem.media_type || (hItem.first_air_date ? "tv" : "movie");
+          if (hItem.original_language === "ja" && hItem.genre_ids && hItem.genre_ids.indexOf(16) !== -1) {
+            mediaType = "anime";
+          }
+          if (hItem.poster_path || hItem.backdrop_path) {
+            state.items.push({
+              id: hItem.id,
+              type: mediaType,
+              title: hItem.title || hItem.name || "Media Title",
+              poster: hItem.poster_path ? "https://image.tmdb.org/t/p/w342" + hItem.poster_path : "",
+              backdrop: hItem.backdrop_path ? "https://image.tmdb.org/t/p/w780" + hItem.backdrop_path : "",
+              overview: hItem.overview || "Popular stream entertainment.",
+              year: (hItem.release_date || hItem.first_air_date || "N/A").split("-")[0],
+              rating: hItem.vote_average ? hItem.vote_average.toFixed(1) : "N/A"
+            });
+          }
+        }
+        state.isLoading = false;
+        if (state.items.length > 0 && !state.searchQuery) {
+          state.spotlightItem = state.items[0];
+        }
+        renderSpotlight();
+        renderGrid();
+        if (callback) callback();
+      }, function () {
+        state.isLoading = false;
+        renderGrid();
+      });
+      return;
+    }
+
+    // Movie / TV
+    var endpoint = "";
+    if (query) {
+      endpoint = "https://api.themoviedb.org/3/search/" + tab + "?api_key=" + TMDB_KEY +
+        "&query=" + encodeURIComponent(query) + "&page=" + page;
+    } else {
+      var path = cat === "trending" ? "trending/" + tab + "/week" :
+        (cat === "popular" ? tab + "/popular" : tab + "/top_rated");
+      endpoint = "https://api.themoviedb.org/3/" + path + "?api_key=" + TMDB_KEY + "&page=" + page;
+      if (genre) endpoint += "&with_genres=" + genre;
+    }
+
+    ajaxGet(endpoint, function (res) {
+      var results = (res && res.results) ? res.results : [];
+      state.totalPages = Math.min((res && res.total_pages) ? res.total_pages : 1, 500);
+      state.items = [];
+      for (var i = 0; i < results.length; i++) {
+        var item = results[i];
+        if (item.poster_path || item.backdrop_path) {
+          state.items.push({
+            id: item.id,
+            type: tab,
+            title: item.title || item.name || "Untitled",
+            poster: item.poster_path ? "https://image.tmdb.org/t/p/w342" + item.poster_path : "",
+            backdrop: item.backdrop_path ? "https://image.tmdb.org/t/p/w780" + item.backdrop_path : "",
+            overview: item.overview || "Stream media title.",
+            year: (item.release_date || item.first_air_date || "N/A").split("-")[0],
+            rating: item.vote_average ? item.vote_average.toFixed(1) : "N/A"
+          });
+        }
+      }
+      state.isLoading = false;
+      if (state.items.length > 0 && !state.searchQuery) {
+        state.spotlightItem = state.items[0];
+      }
+      renderSpotlight();
+      renderGrid();
+      if (callback) callback();
+    }, function () {
+      state.isLoading = false;
+      renderGrid();
+    });
+  }
+
+  // --- Rendering UI with Pure DOM & Safe HTML Strings ---
+  function renderTabs() {
+    var tabs = [
+      { id: "home", label: "Home" },
+      { id: "movie", label: "Movies" },
+      { id: "tv", label: "TV Shows" },
+      { id: "anime", label: "Anime" },
+      { id: "archive", label: "Public Domain" },
+      { id: "watchlist", label: "Watchlist (" + state.watchlist.length + ")" }
+    ];
+
+    var html = "";
+    for (var i = 0; i < tabs.length; i++) {
+      var t = tabs[i];
+      var isAct = state.currentTab === t.id ? " active" : "";
+      html += '<button type="button" class="tv-tab' + isAct + '" tabindex="0" data-nav="tab" data-tab="' + t.id + '">' +
+        t.label + '</button>';
+    }
+    var container = document.getElementById("tv-nav-tabs");
+    if (container) container.innerHTML = html;
+  }
+
+  function renderFilters() {
+    var bar = document.getElementById("tv-filter-bar");
+    if (!bar) return;
+    if (state.currentTab === "watchlist") {
+      bar.style.display = "none";
+      return;
+    }
+    bar.style.display = "block";
+
+    var categories = [
+      { id: "trending", label: "Trending" },
+      { id: "popular", label: "Most Popular" },
+      { id: "top_rated", label: "Top Rated" }
+    ];
+
+    var html = '<div class="tv-filter-inner"><span class="tv-section-label">Sort:</span>';
+    for (var i = 0; i < categories.length; i++) {
+      var c = categories[i];
+      var act = state.currentCategory === c.id ? " active" : "";
+      html += '<button type="button" class="tv-chip' + act + '" tabindex="0" data-nav="cat" data-cat="' + c.id + '">' +
+        c.label + '</button>';
+    }
+
+    var curGenres = GENRES_MAP[state.currentTab] || [];
+    if (curGenres.length > 0) {
+      html += '<span class="tv-section-label" style="margin-left:18px;">Genre:</span>';
+      html += '<button type="button" class="tv-chip' + (state.currentGenre === "" ? " genre-active" : "") +
+        '" tabindex="0" data-nav="genre" data-genre="">All</button>';
+      for (var j = 0; j < Math.min(curGenres.length, 8); j++) {
+        var g = curGenres[j];
+        var gAct = state.currentGenre === g.id ? " genre-active" : "";
+        html += '<button type="button" class="tv-chip' + gAct + '" tabindex="0" data-nav="genre" data-genre="' + g.id + '">' +
+          g.name + '</button>';
+      }
+    }
+    html += '</div>';
+    bar.innerHTML = html;
+  }
+
+  function renderSpotlight() {
+    var container = document.getElementById("tv-spotlight");
+    if (!container) return;
+    var item = state.spotlightItem;
+    if (!item || state.currentTab === "watchlist" || state.searchQuery) {
+      container.style.display = "none";
+      return;
+    }
+
+    container.style.display = "block";
+    if (item.backdrop || item.poster) {
+      container.style.backgroundImage = "linear-gradient(to right, rgba(13,13,17,0.95) 35%, rgba(13,13,17,0.7) 70%, rgba(13,13,17,0.4) 100%), url('" + (item.backdrop || item.poster) + "')";
+    }
+
+    var isBookmarked = isInWatchlist(item.id);
+    var html = '<div class="tv-spotlight-content">' +
+      '<span class="tv-spotlight-badge">' + (item.type || "FEATURED").toUpperCase() + '</span>' +
+      (item.rating && item.rating !== "N/A" ? '<span class="tv-spotlight-rating">&#9733; ' + item.rating + '</span>' : '') +
+      '<h2 class="tv-spotlight-title">' + escapeHtml(item.title) + '</h2>' +
+      '<p class="tv-spotlight-desc">' + escapeHtml(item.overview || "Click Play to begin streaming on your TV screen.") + '</p>' +
+      '<div>' +
+        '<button type="button" class="tv-btn tv-btn-primary" tabindex="0" id="btn-spotlight-play" data-id="' + item.id + '">&#9658; PLAY NOW [OK]</button>' +
+        '<button type="button" class="tv-btn tv-btn-secondary" tabindex="0" id="btn-spotlight-info" data-id="' + item.id + '">&#9432; DETAILS</button>' +
+        '<button type="button" class="tv-btn tv-btn-secondary" tabindex="0" id="btn-spotlight-bookmark" data-id="' + item.id + '">' +
+          (isBookmarked ? '&#10004; SAVED' : '+ WATCHLIST') +
+        '</button>' +
+      '</div>' +
+    '</div>';
+    container.innerHTML = html;
+  }
+
+  function renderGrid() {
+    var container = document.getElementById("tv-grid");
+    if (!container) return;
+
+    if (state.isLoading) {
+      container.innerHTML = '<div class="tv-state-panel">' +
+        '<div class="tv-spinner"></div>' +
+        '<p style="font-size:18px; font-weight:bold; color:#a0a0b8;">Loading media streams for TV...</p>' +
+        '</div>';
+      return;
+    }
+
+    if (!state.items || state.items.length === 0) {
+      var msg = state.currentTab === "watchlist" ?
+        "Your Watchlist is currently empty. Bookmark movies or TV shows to watch them here anytime." :
+        "No media streams found matching your request. Try another category or search.";
+      container.innerHTML = '<div class="tv-state-panel">' +
+        '<p style="font-size:20px; font-weight:bold; color:#ffffff; margin-bottom:8px;">No Items Found</p>' +
+        '<p style="font-size:14px; color:#888899;">' + msg + '</p>' +
+        '</div>';
+      renderPagination();
+      return;
+    }
+
+    var html = "";
+    for (var i = 0; i < state.items.length; i++) {
+      var item = state.items[i];
+      var posterSrc = item.poster || "data:image/svg+xml;charset=utf-8," + encodeURIComponent(getSvgPoster(item.title, item.type, item.year));
+      var typeLabel = item.type === "archive" ? "ARCHIVE" : (item.type || "MEDIA").toUpperCase();
+      var isSaved = isInWatchlist(item.id);
+
+      html += '<div class="tv-card" tabindex="0" data-nav="card" data-index="' + i + '" data-id="' + item.id + '" title="' + escapeHtml(item.title) + '">' +
+        '<div class="tv-poster-wrap">' +
+          '<img class="tv-poster-img" src="' + posterSrc + '" alt="' + escapeHtml(item.title) + '" onerror="this.onerror=null;this.src=\'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(getSvgPoster(item.title, item.type, item.year)) + '\'">' +
+          '<span class="tv-card-badge-type">' + typeLabel + '</span>' +
+          (item.rating && item.rating !== "N/A" ? '<span class="tv-card-badge-rating">&#9733; ' + item.rating + '</span>' : '') +
+        '</div>' +
+        '<div class="tv-card-info">' +
+          '<div class="tv-card-title">' + escapeHtml(item.title) + '</div>' +
+          '<div class="tv-card-meta">' +
+            '<span>' + (item.year || "") + '</span>' +
+            (isSaved ? '<span style="color:#e50914; float:right; font-weight:bold;">&#9733; SAVED</span>' : '') +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    container.innerHTML = html;
+    renderPagination();
+  }
+
+  function renderPagination() {
+    var pag = document.getElementById("tv-pagination");
+    if (!pag) return;
+    if (state.currentTab === "watchlist" || state.totalPages <= 1 || state.items.length === 0) {
+      pag.style.display = "none";
+      return;
+    }
+    pag.style.display = "block";
+    pag.innerHTML = '<button type="button" class="tv-btn tv-btn-secondary" tabindex="0" id="btn-page-prev"' +
+      (state.currentPage <= 1 ? ' disabled style="opacity:0.4;"' : '') + '>&#9664; PREVIOUS PAGE</button>' +
+      '<span class="tv-page-indicator">Page ' + state.currentPage + ' of ' + state.totalPages + '</span>' +
+      '<button type="button" class="tv-btn tv-btn-secondary" tabindex="0" id="btn-page-next"' +
+      (state.currentPage >= state.totalPages ? ' disabled style="opacity:0.4;"' : '') + '>NEXT PAGE &#9654;</button>';
+  }
+
+  function renderContinueWatching() {
+    var container = document.getElementById("tv-history-section");
+    if (!container) return;
+    if (!state.history || state.history.length === 0 || state.currentTab === "watchlist") {
+      container.style.display = "none";
+      return;
+    }
+    container.style.display = "block";
+
+    var html = '<div class="tv-section-header">' +
+      '<span class="tv-section-title">&#8635; Continue Watching</span>' +
+      '<button type="button" class="tv-btn tv-btn-secondary" id="btn-clear-history" tabindex="0" style="padding:4px 10px; font-size:12px; float:right;">Clear History</button>' +
+      '</div>' +
+      '<div class="tv-grid" style="white-space:nowrap; overflow-x:auto; padding-bottom:10px;">';
+
+    for (var i = 0; i < Math.min(state.history.length, 10); i++) {
+      var h = state.history[i];
+      var epText = (h.type === "tv" || h.type === "anime") ? ("S" + (h.resumeSeason || 1) + " E" + (h.resumeEpisode || 1)) : "Movie";
+      html += '<div class="tv-card" style="width:160px; display:inline-block; margin-right:12px;" tabindex="0" data-nav="history-card" data-id="' + h.id + '">' +
+        '<div class="tv-poster-wrap">' +
+          '<img class="tv-poster-img" src="' + (h.poster || "") + '" alt="' + escapeHtml(h.title) + '">' +
+          '<span class="tv-card-badge-type" style="background-color:#e50914;">' + epText + '</span>' +
+        '</div>' +
+        '<div class="tv-card-info">' +
+          '<div class="tv-card-title">' + escapeHtml(h.title) + '</div>' +
+        '</div>' +
+      '</div>';
+    }
+    html += '</div>';
+    container.innerHTML = html;
+  }
+
+  // --- SVG Poster Fallback for Old Screens & Offline Assets ---
+  function getSvgPoster(title, type, year) {
+    var safeTitle = escapeHtml(title || "Cinema");
+    var safeYear = year ? String(year) : "";
+    var badgeColor = type === "anime" ? "#9333ea" : (type === "tv" ? "#2563eb" : (type === "archive" ? "#059669" : "#e50914"));
+    var badgeLabel = type === "anime" ? "ANIME" : (type === "tv" ? "TV SHOW" : (type === "archive" ? "PUBLIC DOMAIN" : "CINEMA"));
+
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" width="400" height="600">' +
+      '<rect width="100%" height="100%" fill="#161622" />' +
+      '<circle cx="200" cy="240" r="80" fill="none" stroke="#2c2c3e" stroke-width="4" />' +
+      '<polygon points="190,215 225,240 190,265" fill="' + badgeColor + '" />' +
+      '<rect x="20" y="20" width="130" height="30" rx="6" fill="' + badgeColor + '" />' +
+      '<text x="85" y="40" fill="#ffffff" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle">' + badgeLabel + '</text>' +
+      (safeYear ? '<text x="350" y="40" fill="#aaaaaa" font-family="Arial" font-size="13" font-weight="bold" text-anchor="middle">' + safeYear + '</text>' : '') +
+      '<text x="200" y="490" fill="#ffffff" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle">' +
+        (safeTitle.length > 20 ? safeTitle.slice(0, 18) + "..." : safeTitle) +
+      '</text>' +
+      '<text x="200" y="525" fill="#888899" font-family="Arial" font-size="12" letter-spacing="2" text-anchor="middle">WRITERSTM TV</text>' +
+    '</svg>';
+  }
+
+  function escapeHtml(str) {
+    if (!str) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function isInWatchlist(id) {
+    for (var i = 0; i < state.watchlist.length; i++) {
+      if (String(state.watchlist[i].id) === String(id)) return true;
+    }
+    return false;
+  }
+
+  function toggleWatchlist(item) {
+    var foundIdx = -1;
+    for (var i = 0; i < state.watchlist.length; i++) {
+      if (String(state.watchlist[i].id) === String(item.id)) {
+        foundIdx = i;
+        break;
+      }
+    }
+    if (foundIdx !== -1) {
+      state.watchlist.splice(foundIdx, 1);
+      showToast("Removed from Watchlist");
+    } else {
+      state.watchlist.unshift(item);
+      showToast("Saved to Watchlist!");
+    }
+    setStorage(WATCHLIST_STORAGE_KEY, state.watchlist);
+    renderTabs();
+    renderSpotlight();
+    if (state.currentTab === "watchlist") {
+      fetchMedia();
+    } else {
+      renderGrid();
+    }
+  }
+
+  function saveHistory(item, season, episode) {
+    var filtered = [];
+    for (var i = 0; i < state.history.length; i++) {
+      if (String(state.history[i].id) !== String(item.id)) {
+        filtered.push(state.history[i]);
+      }
+    }
+    var entry = {
+      id: item.id,
+      type: item.type,
+      title: item.title,
+      poster: item.poster,
+      resumeSeason: season || item.resumeSeason || 1,
+      resumeEpisode: episode || item.resumeEpisode || 1,
+      time: new Date().getTime()
+    };
+    filtered.unshift(entry);
+    state.history = filtered.slice(0, 20);
+    setStorage(HISTORY_STORAGE_KEY, state.history);
+    renderContinueWatching();
+  }
+
+  // --- TV Video Player & Streaming Manager ---
+  function getStreamUrl(server, id, type, season, episode) {
+    var isMovie = (type === "movie");
+    var s = season || 1;
+    var ep = episode || 1;
+
+    switch (server) {
+      case "vidlink":
+        return isMovie ?
+          "https://vidlink.pro/movie/" + id + "?autoplay=true&sub.lang=en&sub.default=true" :
+          "https://vidlink.pro/tv/" + id + "/" + s + "/" + ep + "?autoplay=true&sub.lang=en&sub.default=true";
+      case "embedsu":
+        return isMovie ?
+          "https://embed.su/embed/movie/" + id + "?autoplay=1" :
+          "https://embed.su/embed/tv/" + id + "/" + s + "/" + ep + "?autoplay=1";
+      case "vidsrc_to":
+        return isMovie ?
+          "https://vidsrc.to/embed/movie/" + id + "?autoplay=1" :
+          "https://vidsrc.to/embed/tv/" + id + "/" + s + "/" + ep + "?autoplay=1";
+      case "autoembed":
+        return isMovie ?
+          "https://player.autoembed.cc/embed/movie/" + id + "?autoplay=1" :
+          "https://player.autoembed.cc/embed/tv/" + id + "/" + s + "/" + ep + "?autoplay=1";
+      case "vidsrc_me":
+        return isMovie ?
+          "https://vidsrc.me/embed/movie?tmdb=" + id + "&autoplay=1" :
+          "https://vidsrc.me/embed/tv?tmdb=" + id + "&season=" + s + "&episode=" + ep + "&autoplay=1";
+      case "vidbinge":
+        return isMovie ?
+          "https://vidbinge.com/embed/movie/" + id + "?autoplay=1" :
+          "https://vidbinge.com/embed/tv/" + id + "/" + s + "/" + ep + "?autoplay=1";
+      case "smashy":
+        return isMovie ?
+          "https://player.smashy.stream/movie/" + id + "?autoplay=1" :
+          "https://player.smashy.stream/tv/" + id + "?s=" + s + "&e=" + ep + "&autoplay=1";
+      case "2embed":
+        return isMovie ?
+          "https://www.2embed.cc/embed/" + id + "?autoplay=1" :
+          "https://www.2embed.cc/embedtv/" + id + "&s=" + s + "&e=" + ep + "&autoplay=1";
+      case "movieapi":
+        return isMovie ?
+          "https://movieapi.stream/movie/" + id + "?autoplay=1" :
+          "https://movieapi.stream/tv/" + id + "-" + s + "-" + ep + "?autoplay=1";
+      default:
+        return isMovie ?
+          "https://vidlink.pro/movie/" + id + "?autoplay=true" :
+          "https://vidlink.pro/tv/" + id + "/" + s + "/" + ep + "?autoplay=true";
+    }
+  }
+
+  function openPlayer(item, season, episode) {
+    state.currentPlaying = item;
+    state.currentSeason = season || item.resumeSeason || 1;
+    state.currentEpisode = episode || item.resumeEpisode || 1;
+    saveHistory(item, state.currentSeason, state.currentEpisode);
+
+    var modal = document.getElementById("tv-player-modal");
+    if (!modal) return;
+    modal.className = "tv-modal-backdrop open";
+
+    // Set title
+    updatePlayerTitle();
+    renderServerBar();
+
+    // Check if Public domain (Archive.org)
+    if (item.type === "archive") {
+      setupArchivePlayer(item.id);
+    } else {
+      setupEmbedPlayer(item);
+    }
+
+    // If TV or Anime, load seasons & episodes
+    if (item.type === "tv" || item.type === "anime") {
+      loadSeasons(item);
+    } else {
+      var epSec = document.getElementById("tv-player-episodes");
+      if (epSec) epSec.style.display = "none";
+    }
+
+    // Auto focus focus-player button
+    setTimeout(function () {
+      var focusBtn = document.getElementById("btn-focus-player") || document.getElementById("btn-close-player");
+      if (focusBtn) focusElement(focusBtn);
+    }, 150);
+  }
+
+  function updatePlayerTitle() {
+    var titleEl = document.getElementById("tv-player-modal-title");
+    if (titleEl && state.currentPlaying) {
+      var isTv = (state.currentPlaying.type === "tv" || state.currentPlaying.type === "anime");
+      var epSuffix = isTv ? " (Season " + state.currentSeason + " &bull; Episode " + state.currentEpisode + ")" : "";
+      titleEl.innerHTML = escapeHtml(state.currentPlaying.title) + epSuffix;
+    }
+  }
+
+  function setupEmbedPlayer(item) {
+    var stage = document.getElementById("tv-player-stage");
+    if (!stage) return;
+    var streamUrl = getStreamUrl(state.currentServer, item.id, item.type, state.currentSeason, state.currentEpisode);
+    stage.innerHTML = '<iframe class="tv-player-iframe" id="tv-stream-iframe" src="' + streamUrl + '" ' +
+      'allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" ' +
+      'allow="autoplay *; fullscreen *; encrypted-media *; picture-in-picture *" ' +
+      'referrerpolicy="no-referrer"></iframe>';
+    renderExternalBar(streamUrl);
+
+    // Auto-focus video iframe so video starts without needing a mouse!
+    setTimeout(function () {
+      try {
+        var ifr = document.getElementById("tv-stream-iframe");
+        if (ifr) {
+          ifr.focus();
+        }
+      } catch (e) {}
+    }, 600);
+  }
+
+  function setupArchivePlayer(identifier) {
+    var stage = document.getElementById("tv-player-stage");
+    if (!stage) return;
+    stage.innerHTML = '<div class="tv-state-panel"><div class="tv-spinner"></div><p>Resolving Public Domain Video stream...</p></div>';
+
+    var metaUrl = "https://archive.org/metadata/" + encodeURIComponent(identifier);
+    ajaxGet(metaUrl, function (res) {
+      var files = (res && res.files) ? res.files : [];
+      var videoFile = null;
+      for (var i = 0; i < files.length; i++) {
+        var f = files[i];
+        if (f.name && /\.(mp4|m4v|webm)$/i.test(f.name) && !f.private) {
+          videoFile = f.name;
+          break;
+        }
+      }
+      if (!videoFile && files.length > 0) {
+        for (var j = 0; j < files.length; j++) {
+          if (files[j].name && /\.(ogv|avi|mkv)$/i.test(files[j].name)) {
+            videoFile = files[j].name;
+            break;
+          }
+        }
+      }
+
+      if (videoFile) {
+        var directUrl = "https://archive.org/download/" + identifier + "/" + encodeURIComponent(videoFile);
+        state.archiveDirectUrl = directUrl;
+        stage.innerHTML = '<video class="tv-player-video" id="tv-native-video" controls autoplay src="' + directUrl + '"></video>';
+        renderExternalBar(directUrl);
+      } else {
+        stage.innerHTML = '<div class="tv-state-panel"><p style="color:#e50914;">Video stream not found in archive metadata.</p></div>';
+      }
+    }, function () {
+      stage.innerHTML = '<div class="tv-state-panel"><p style="color:#e50914;">Failed to load archive stream.</p></div>';
+    });
+  }
+
+  function renderServerBar() {
+    var bar = document.getElementById("tv-player-servers");
+    if (!bar) return;
+    if (state.currentPlaying && state.currentPlaying.type === "archive") {
+      bar.style.display = "none";
+      return;
+    }
+    bar.style.display = "block";
+
+    var html = '<span class="tv-server-label">Servers [1-9]:</span>';
+    for (var i = 0; i < SERVERS_LIST.length; i++) {
+      var s = SERVERS_LIST[i];
+      var isAct = state.currentServer === s.id ? " active" : "";
+      html += '<button type="button" class="tv-server-btn' + isAct + '" tabindex="0" data-nav="server" data-server="' + s.id + '">' +
+        s.name + '</button>';
+    }
+    bar.innerHTML = html;
+  }
+
+  function renderExternalBar(url) {
+    var bar = document.getElementById("tv-player-ext-bar");
+    if (!bar) return;
+    var vlcIntent = "intent:" + url + "#Intent;package=org.videolan.vlc;type=video/*;end";
+    bar.innerHTML = '<span class="tv-server-label">External Play:</span>' +
+      '<a class="tv-ext-link" tabindex="0" href="' + vlcIntent + '" target="_blank">&#9658; Launch VLC / MX Player</a>' +
+      '<a class="tv-ext-link" tabindex="0" href="' + url + '" target="_blank">&#10532; Direct Stream Link</a>' +
+      '<button type="button" class="tv-btn tv-btn-secondary" tabindex="0" id="btn-copy-stream" style="padding:4px 10px; font-size:12px;">Copy URL</button>';
+
+    var copyBtn = document.getElementById("btn-copy-stream");
+    if (copyBtn) {
+      copyBtn.onclick = function () {
+        if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url);
+          showToast("Stream URL copied to clipboard!");
+        } else {
+          prompt("Stream URL:", url);
+        }
+      };
+    }
+  }
+
+  function loadSeasons(item) {
+    var epSec = document.getElementById("tv-player-episodes");
+    if (!epSec) return;
+    epSec.style.display = "block";
+    epSec.innerHTML = '<p style="color:#888899; font-size:13px;">Loading seasons...</p>';
+
+    var tvDetailUrl = "https://api.themoviedb.org/3/tv/" + item.id + "?api_key=" + TMDB_KEY;
+    ajaxGet(tvDetailUrl, function (res) {
+      var seasons = (res && res.seasons) ? res.seasons : [];
+      state.seasonsList = [];
+      for (var i = 0; i < seasons.length; i++) {
+        if (seasons[i].season_number > 0) {
+          state.seasonsList.push(seasons[i]);
+        }
+      }
+      renderSeasonsDropdown();
+      loadEpisodes(item.id, state.currentSeason);
+    }, function () {
+      epSec.innerHTML = '<p style="color:#888899;">Single season presentation</p>';
+    });
+  }
+
+  function renderSeasonsDropdown() {
+    var epSec = document.getElementById("tv-player-episodes");
+    if (!epSec) return;
+
+    var html = '<div style="margin-bottom:8px;">' +
+      '<label class="tv-server-label">Season: </label>' +
+      '<select class="tv-season-select" id="tv-season-picker" tabindex="0">';
+
+    for (var i = 0; i < state.seasonsList.length; i++) {
+      var s = state.seasonsList[i];
+      var sel = s.season_number === state.currentSeason ? ' selected="selected"' : '';
+      html += '<option value="' + s.season_number + '"' + sel + '>Season ' + s.season_number + ' (' + (s.episode_count || "") + ' eps)</option>';
+    }
+    html += '</select>' +
+      '<button type="button" class="tv-btn tv-btn-secondary" tabindex="0" id="btn-prev-ep" style="padding:4px 10px; font-size:12px; margin-left:12px;">&#9664; Prev Ep</button>' +
+      '<button type="button" class="tv-btn tv-btn-secondary" tabindex="0" id="btn-next-ep" style="padding:4px 10px; font-size:12px; margin-left:4px;">Next Ep &#9654;</button>' +
+      '</div><div id="tv-episodes-grid" class="tv-episodes-grid"><div class="tv-spinner"></div></div>';
+    epSec.innerHTML = html;
+
+    var picker = document.getElementById("tv-season-picker");
+    if (picker) {
+      picker.onchange = function () {
+        state.currentSeason = parseInt(picker.value, 10) || 1;
+        state.currentEpisode = 1;
+        if (state.currentPlaying) {
+          updatePlayerTitle();
+          loadEpisodes(state.currentPlaying.id, state.currentSeason);
+          setupEmbedPlayer(state.currentPlaying);
+        }
+      };
+    }
+
+    var prevEpBtn = document.getElementById("btn-prev-ep");
+    if (prevEpBtn) {
+      prevEpBtn.onclick = function () {
+        if (state.currentEpisode > 1) {
+          changeEpisode(state.currentEpisode - 1);
+        }
+      };
+    }
+
+    var nextEpBtn = document.getElementById("btn-next-ep");
+    if (nextEpBtn) {
+      nextEpBtn.onclick = function () {
+        changeEpisode(state.currentEpisode + 1);
+      };
+    }
+  }
+
+  function changeEpisode(epNum) {
+    state.currentEpisode = epNum;
+    if (state.currentPlaying) {
+      saveHistory(state.currentPlaying, state.currentSeason, state.currentEpisode);
+      setupEmbedPlayer(state.currentPlaying);
+      updatePlayerTitle();
+      loadEpisodes(state.currentPlaying.id, state.currentSeason);
+    }
+  }
+
+  function loadEpisodes(tvId, seasonNum) {
+    var grid = document.getElementById("tv-episodes-grid");
+    if (!grid) return;
+    grid.innerHTML = '<div class="tv-spinner"></div>';
+
+    var epUrl = "https://api.themoviedb.org/3/tv/" + tvId + "/season/" + seasonNum + "?api_key=" + TMDB_KEY;
+    ajaxGet(epUrl, function (res) {
+      var eps = (res && res.episodes) ? res.episodes : [];
+      state.episodesList = eps;
+      var html = "";
+      for (var i = 0; i < eps.length; i++) {
+        var ep = eps[i];
+        var isAct = ep.episode_number === state.currentEpisode ? " active" : "";
+        html += '<button type="button" class="tv-ep-btn' + isAct + '" tabindex="0" data-nav="ep" data-ep="' + ep.episode_number + '">' +
+          'Ep ' + ep.episode_number +
+        '</button>';
+      }
+      grid.innerHTML = html;
+    }, function () {
+      grid.innerHTML = '<p style="color:#888899; font-size:12px;">Episodes list unavailable</p>';
+    });
+  }
+
+  function closePlayer() {
+    var modal = document.getElementById("tv-player-modal");
+    if (modal) modal.className = "tv-modal-backdrop";
+    var stage = document.getElementById("tv-player-stage");
+    if (stage) stage.innerHTML = "";
+    state.currentPlaying = null;
+  }
+
+  // --- Details Modal ---
+  function openInfoModal(item) {
+    state.infoItem = item;
+    var modal = document.getElementById("tv-info-modal");
+    if (!modal) return;
+    modal.className = "tv-modal-backdrop open";
+
+    var titleEl = document.getElementById("tv-info-modal-title");
+    if (titleEl) titleEl.innerHTML = escapeHtml(item.title);
+
+    var bodyEl = document.getElementById("tv-info-modal-body");
+    if (!bodyEl) return;
+    bodyEl.innerHTML = '<div class="tv-state-panel"><div class="tv-spinner"></div><p>Loading media details...</p></div>';
+
+    var isBookmarked = isInWatchlist(item.id);
+    var posterSrc = item.poster || "data:image/svg+xml;charset=utf-8," + encodeURIComponent(getSvgPoster(item.title, item.type, item.year));
+
+    var infoHtml = '<div class="tv-details-grid clearfix">' +
+      '<img class="tv-details-poster" src="' + posterSrc + '" alt="' + escapeHtml(item.title) + '">' +
+      '<div class="tv-details-info">' +
+        '<div style="margin-bottom:14px;">' +
+          '<button type="button" class="tv-btn tv-btn-primary" tabindex="0" id="btn-info-play">&#9658; PLAY NOW [OK]</button>' +
+          '<button type="button" class="tv-btn tv-btn-secondary" tabindex="0" id="btn-info-bookmark">' +
+            (isBookmarked ? '&#10004; SAVED IN WATCHLIST' : '+ ADD TO WATCHLIST') +
+          '</button>' +
+        '</div>' +
+        '<div class="tv-meta-row"><strong>Type:</strong> ' + (item.type || "").toUpperCase() + '</div>' +
+        '<div class="tv-meta-row"><strong>Rating:</strong> &#9733; ' + (item.rating || "N/A") + '</div>' +
+        '<div class="tv-meta-row"><strong>Release Year:</strong> ' + (item.year || "Classic") + '</div>' +
+        '<div class="tv-details-synopsis"><strong>Synopsis:</strong><br>' + escapeHtml(item.overview || "No synopsis available.") + '</div>' +
+      '</div>' +
+    '</div>';
+
+    bodyEl.innerHTML = infoHtml;
+
+    var playBtn = document.getElementById("btn-info-play");
+    if (playBtn) {
+      playBtn.onclick = function () {
+        closeInfoModal();
+        openPlayer(item);
+      };
+      focusElement(playBtn);
+    }
+
+    var bmBtn = document.getElementById("btn-info-bookmark");
+    if (bmBtn) {
+      bmBtn.onclick = function () {
+        toggleWatchlist(item);
+        openInfoModal(item);
+      };
+    }
+  }
+
+  function closeInfoModal() {
+    var modal = document.getElementById("tv-info-modal");
+    if (modal) modal.className = "tv-modal-backdrop";
+    state.infoItem = null;
+  }
+
+  // --- TV Remote Spatial Navigation (D-Pad) Controller ---
+  var currentFocusedElem = null;
+
+  function isElementVisible(el) {
+    if (!el) return false;
+    return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+  }
+
+  function getAllFocusableElements() {
+    var openModal = document.querySelector(".tv-modal-backdrop.open");
+    var root = openModal || document.body;
+    var candidates = root.querySelectorAll('button, [tabindex="0"], input, select, a, .tv-card, .tv-tab, .tv-chip');
+    var focusable = [];
+    for (var i = 0; i < candidates.length; i++) {
+      var el = candidates[i];
+      if (isElementVisible(el) && !el.disabled && el.getAttribute("tabindex") !== "-1") {
+        focusable.push(el);
+      }
+    }
+    return focusable;
+  }
+
+  function focusElement(el) {
+    if (!el) return;
+    if (currentFocusedElem && currentFocusedElem !== el) {
+      currentFocusedElem.classList.remove("tv-focused");
+    }
+    currentFocusedElem = el;
+    el.classList.add("tv-focused");
+    try {
+      el.focus();
+    } catch (e) {}
+
+    // Smooth TV scroll into viewport
+    try {
+      if (el.scrollIntoViewIfNeeded) {
+        el.scrollIntoViewIfNeeded(false);
+      } else if (el.scrollIntoView) {
+        el.scrollIntoView({ block: "nearest", inline: "nearest" });
+      }
+    } catch (e) {}
+  }
+
+  function findNextFocusable(direction) {
+    var all = getAllFocusableElements();
+    if (!all.length) return null;
+
+    if (!currentFocusedElem || all.indexOf(currentFocusedElem) === -1) {
+      return all[0];
+    }
+
+    var curRect = currentFocusedElem.getBoundingClientRect();
+    var curCenterX = curRect.left + curRect.width / 2;
+    var curCenterY = curRect.top + curRect.height / 2;
+
+    var bestEl = null;
+    var bestDistance = Infinity;
+
+    for (var i = 0; i < all.length; i++) {
+      var candidate = all[i];
+      if (candidate === currentFocusedElem) continue;
+
+      var candRect = candidate.getBoundingClientRect();
+      var candCenterX = candRect.left + candRect.width / 2;
+      var candCenterY = candRect.top + candRect.height / 2;
+
+      var dx = candCenterX - curCenterX;
+      var dy = candCenterY - curCenterY;
+
+      var isCandidateInDirection = false;
+      if (direction === "up" && dy < -5) isCandidateInDirection = true;
+      if (direction === "down" && dy > 5) isCandidateInDirection = true;
+      if (direction === "left" && dx < -5) isCandidateInDirection = true;
+      if (direction === "right" && dx > 5) isCandidateInDirection = true;
+
+      if (!isCandidateInDirection) continue;
+
+      var dist;
+      if (direction === "up" || direction === "down") {
+        dist = Math.abs(dy) * 1.0 + Math.abs(dx) * 2.2;
+      } else {
+        dist = Math.abs(dx) * 1.0 + Math.abs(dy) * 2.2;
+      }
+
+      if (dist < bestDistance) {
+        bestDistance = dist;
+        bestEl = candidate;
+      }
+    }
+
+    // Fallback: If navigating in linear row/column
+    if (!bestEl) {
+      var idx = all.indexOf(currentFocusedElem);
+      if (direction === "right" && idx < all.length - 1) {
+        bestEl = all[idx + 1];
+      } else if (direction === "left" && idx > 0) {
+        bestEl = all[idx - 1];
+      } else if (direction === "down" && idx < all.length - 1) {
+        bestEl = all[idx + 1];
+      } else if (direction === "up" && idx > 0) {
+        bestEl = all[idx - 1];
+      }
+    }
+
+    return bestEl;
+  }
+
+  // Key Down Remote Controller Handler
+  var lastBackPressTime = 0;
+  function handleTVKeyDown(e) {
+    var keyCode = e.keyCode || e.which;
+    var activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : "";
+
+    // Allow typing inside text input
+    if (activeTag === "input") {
+      if (keyCode === 13) {
+        // Enter in search input
+        state.searchQuery = document.getElementById("tv-search-input").value.trim();
+        state.currentPage = 1;
+        fetchMedia();
+        return;
+      }
+      if (keyCode === 37 || keyCode === 39) {
+        return; // Caret navigation
+      }
+    }
+
+    // If in Player, numeric keys 1-9 switch streaming servers directly!
+    var playerModal = document.getElementById("tv-player-modal");
+    var isPlayerOpen = playerModal && playerModal.classList.contains("open");
+    if (isPlayerOpen && keyCode >= 49 && keyCode <= 57) {
+      var serverIndex = keyCode - 49;
+      if (serverIndex < SERVERS_LIST.length) {
+        var chosenServer = SERVERS_LIST[serverIndex];
+        state.currentServer = chosenServer.id;
+        setStorage(SERVER_STORAGE_KEY, chosenServer.id);
+        renderServerBar();
+        if (state.currentPlaying) {
+          setupEmbedPlayer(state.currentPlaying);
+        }
+        showToast("Switched to " + chosenServer.name);
+        return;
+      }
+    }
+
+    // Info Key (keyCode 73 for 'I' or 457 for TV remote Info key)
+    if (keyCode === 73 || keyCode === 457) {
+      if (currentFocusedElem && currentFocusedElem.getAttribute("data-nav") === "card") {
+        var idx = parseInt(currentFocusedElem.getAttribute("data-index"), 10);
+        if (state.items[idx]) {
+          openInfoModal(state.items[idx]);
+          return;
+        }
+      }
+    }
+
+    switch (keyCode) {
+      case 38: // UP
+        e.preventDefault();
+        var nextUp = findNextFocusable("up");
+        if (nextUp) focusElement(nextUp);
+        break;
+
+      case 40: // DOWN
+        e.preventDefault();
+        var nextDown = findNextFocusable("down");
+        if (nextDown) focusElement(nextDown);
+        break;
+
+      case 37: // LEFT
+        e.preventDefault();
+        var nextLeft = findNextFocusable("left");
+        if (nextLeft) focusElement(nextLeft);
+        break;
+
+      case 39: // RIGHT
+        e.preventDefault();
+        var nextRight = findNextFocusable("right");
+        if (nextRight) focusElement(nextRight);
+        break;
+
+      case 13: // ENTER / OK
+        if (currentFocusedElem && currentFocusedElem.click) {
+          e.preventDefault();
+          currentFocusedElem.click();
+        }
+        break;
+
+      case 4: // Android System / Remote Back Key (CRITICAL FOR APK!)
+      case 27: // ESC
+      case 8: // Backspace (when not in input)
+      case 461: // LG webOS Back
+      case 10009: // Samsung Tizen Return
+      case 10008: // Samsung Return
+      case 10182: // Samsung Exit
+      case 178: // TV Exit
+      case 216: // Remote Exit
+      case 88: // 'X' key shortcut
+        if (activeTag !== "input" || keyCode === 27 || keyCode === 4) {
+          e.preventDefault();
+          e.stopPropagation();
+          handleBackKey();
+        }
+        break;
+    }
+  }
+
+  function handleBackKey() {
+    var playerModal = document.getElementById("tv-player-modal");
+    // 1. If player open and in cinema mode, return to regular player controls
+    if (playerModal && playerModal.classList.contains("open")) {
+      if (playerModal.classList.contains("cinema-mode")) {
+        playerModal.classList.remove("cinema-mode");
+        showToast("Restored player controls");
+        return;
+      }
+      // Close player and return directly to movie grid
+      closePlayer();
+      showToast("Returned to browsing");
+      return;
+    }
+
+    // 2. If info modal open, close it
+    var infoModal = document.getElementById("tv-info-modal");
+    if (infoModal && infoModal.classList.contains("open")) {
+      closeInfoModal();
+      return;
+    }
+
+    // 3. If in search query, clear it
+    if (state.searchQuery) {
+      state.searchQuery = "";
+      var searchInput = document.getElementById("tv-search-input");
+      if (searchInput) searchInput.value = "";
+      state.currentPage = 1;
+      fetchMedia();
+      showToast("Cleared search");
+      return;
+    }
+
+    // 4. If in genre filter, clear it
+    if (state.currentGenre) {
+      state.currentGenre = "";
+      state.currentPage = 1;
+      renderFilters();
+      fetchMedia();
+      return;
+    }
+
+    // 5. If on page > 1, go back to page 1
+    if (state.currentPage > 1) {
+      state.currentPage = 1;
+      fetchMedia();
+      showToast("Returned to Page 1");
+      return;
+    }
+
+    // 6. If not on home tab, return to home
+    if (state.currentTab !== "home") {
+      state.currentTab = "home";
+      state.currentCategory = "trending";
+      state.currentPage = 1;
+      renderTabs();
+      renderFilters();
+      fetchMedia();
+      showToast("Returned to Home");
+      return;
+    }
+
+    // 7. Otherwise warn user before exiting
+    var now = new Date().getTime();
+    if (now - lastBackPressTime < 3000) {
+      // Exit app safely
+      try {
+        if (window.tizen && window.tizen.application) {
+          window.tizen.application.getCurrentApplication().exit();
+        } else if (window.webOS && window.webOS.platformBack) {
+          window.webOS.platformBack();
+        } else {
+          window.history.go(-2);
+        }
+      } catch (e) {
+        window.history.back();
+      }
+    } else {
+      lastBackPressTime = now;
+      showToast("Press [BACK / EXIT] again to exit app");
+    }
+  }
+
+  // --- Click & Event Delegation ---
+  function setupEventDelegation() {
+    document.addEventListener("click", function (e) {
+      var target = e.target;
+
+      while (target && target !== document.body) {
+        // Tab button
+        if (target.getAttribute("data-nav") === "tab") {
+          var tabId = target.getAttribute("data-tab");
+          if (tabId && tabId !== state.currentTab) {
+            state.currentTab = tabId;
+            state.currentCategory = "trending";
+            state.currentGenre = "";
+            state.searchQuery = "";
+            state.currentPage = 1;
+            renderTabs();
+            renderFilters();
+            fetchMedia();
+          }
+          return;
+        }
+
+        // Category button
+        if (target.getAttribute("data-nav") === "cat") {
+          var catId = target.getAttribute("data-cat");
+          if (catId) {
+            state.currentCategory = catId;
+            state.currentPage = 1;
+            renderFilters();
+            fetchMedia();
+          }
+          return;
+        }
+
+        // Genre chip
+        if (target.getAttribute("data-nav") === "genre") {
+          var gId = target.getAttribute("data-genre");
+          state.currentGenre = gId || "";
+          state.currentPage = 1;
+          renderFilters();
+          fetchMedia();
+          return;
+        }
+
+        // Quick search tag
+        if (target.getAttribute("data-quick")) {
+          var term = target.getAttribute("data-quick");
+          var sInput = document.getElementById("tv-search-input");
+          if (sInput) sInput.value = term;
+          state.searchQuery = term;
+          state.currentPage = 1;
+          fetchMedia();
+          return;
+        }
+
+        // Media Card
+        if (target.getAttribute("data-nav") === "card") {
+          var cardIdx = parseInt(target.getAttribute("data-index"), 10);
+          var mediaItem = state.items[cardIdx];
+          if (mediaItem) {
+            openPlayer(mediaItem);
+          }
+          return;
+        }
+
+        // Continue Watching Card
+        if (target.getAttribute("data-nav") === "history-card") {
+          var histId = target.getAttribute("data-id");
+          for (var i = 0; i < state.history.length; i++) {
+            if (String(state.history[i].id) === String(histId)) {
+              openPlayer(state.history[i], state.history[i].resumeSeason, state.history[i].resumeEpisode);
+              break;
+            }
+          }
+          return;
+        }
+
+        // Spotlight buttons
+        if (target.id === "btn-spotlight-play") {
+          if (state.spotlightItem) openPlayer(state.spotlightItem);
+          return;
+        }
+        if (target.id === "btn-spotlight-info") {
+          if (state.spotlightItem) openInfoModal(state.spotlightItem);
+          return;
+        }
+        if (target.id === "btn-spotlight-bookmark") {
+          if (state.spotlightItem) toggleWatchlist(state.spotlightItem);
+          return;
+        }
+
+        // Pagination buttons
+        if (target.id === "btn-page-prev") {
+          if (state.currentPage > 1) {
+            state.currentPage--;
+            fetchMedia(function () {
+              window.scrollTo(0, 0);
+            });
+          }
+          return;
+        }
+        if (target.id === "btn-page-next") {
+          if (state.currentPage < state.totalPages) {
+            state.currentPage++;
+            fetchMedia(function () {
+              window.scrollTo(0, 0);
+            });
+          }
+          return;
+        }
+
+        // Clear history button
+        if (target.id === "btn-clear-history") {
+          state.history = [];
+          setStorage(HISTORY_STORAGE_KEY, []);
+          renderContinueWatching();
+          showToast("Watch history cleared");
+          return;
+        }
+
+        // Close Player Modal
+        if (target.id === "btn-close-player" || target.id === "tv-player-modal") {
+          if (target.id === "btn-close-player" || e.target === target) {
+            closePlayer();
+            showToast("Returned to browsing");
+          }
+          return;
+        }
+
+        // Toggle Fullscreen / Cinema Mode
+        if (target.id === "btn-fullscreen-player") {
+          toggleCinemaMode();
+          return;
+        }
+
+        // Focus Video Player for Remote Control
+        if (target.id === "btn-focus-player") {
+          focusVideoPlayer();
+          return;
+        }
+
+        // Close Info Modal
+        if (target.id === "btn-close-info" || target.id === "tv-info-modal") {
+          if (target.id === "btn-close-info" || e.target === target) {
+            closeInfoModal();
+          }
+          return;
+        }
+
+        // Server Switch Button
+        if (target.getAttribute("data-nav") === "server") {
+          var sId = target.getAttribute("data-server");
+          if (sId && state.currentPlaying) {
+            state.currentServer = sId;
+            setStorage(SERVER_STORAGE_KEY, sId);
+            renderServerBar();
+            setupEmbedPlayer(state.currentPlaying);
+          }
+          return;
+        }
+
+        // Episode Button
+        if (target.getAttribute("data-nav") === "ep") {
+          var epNum = parseInt(target.getAttribute("data-ep"), 10) || 1;
+          changeEpisode(epNum);
+          return;
+        }
+
+        target = target.parentNode;
+      }
+    });
+
+    // Hover / Focus tracking
+    document.addEventListener("focusin", function (e) {
+      if (e.target && e.target !== currentFocusedElem) {
+        if (currentFocusedElem) currentFocusedElem.classList.remove("tv-focused");
+        currentFocusedElem = e.target;
+        currentFocusedElem.classList.add("tv-focused");
+      }
+    });
+
+    var searchClearBtn = document.getElementById("btn-search-clear");
+    if (searchClearBtn) {
+      searchClearBtn.onclick = function () {
+        var searchInput = document.getElementById("tv-search-input");
+        if (searchInput) searchInput.value = "";
+        state.searchQuery = "";
+        state.currentPage = 1;
+        fetchMedia();
+      };
+    }
+
+    // Window remote key listener
+    window.addEventListener("keydown", handleTVKeyDown);
+  }
+
+  // --- Cinema Mode & Video Remote Focus Helpers ---
+  function toggleCinemaMode() {
+    var modal = document.getElementById("tv-player-modal");
+    if (!modal) return;
+    if (modal.classList.contains("cinema-mode")) {
+      modal.classList.remove("cinema-mode");
+      showToast("Standard View Restored");
+    } else {
+      modal.classList.add("cinema-mode");
+      // Try HTML5 Fullscreen API if supported
+      try {
+        var elem = document.documentElement;
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) {
+          elem.webkitRequestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+          elem.mozRequestFullScreen();
+        }
+      } catch (err) {}
+      showToast("Cinema Mode (100% Screen) - Press BACK for controls");
+    }
+  }
+
+  function focusVideoPlayer() {
+    var iframe = document.getElementById("tv-stream-iframe");
+    var video = document.getElementById("tv-native-video");
+    if (iframe) {
+      try {
+        iframe.focus();
+        showToast("Player Focused: Press Remote [OK] to Start");
+      } catch (e) {}
+    } else if (video) {
+      try {
+        video.focus();
+        if (video.paused) {
+          video.play();
+          showToast("Playing");
+        } else {
+          video.pause();
+          showToast("Paused");
+        }
+      } catch (e) {}
+    }
+  }
+
+  // Guard browser history so Android TV / APK WebView Back does not exit app
+  function initHistoryGuard() {
+    try {
+      if (window.history && window.history.pushState) {
+        window.history.pushState({ page: "writerstm_app" }, "");
+        window.addEventListener("popstate", function (e) {
+          handleBackKey();
+          try {
+            window.history.pushState({ page: "writerstm_app" }, "");
+          } catch (err) {}
+        });
+      }
+    } catch (e) {}
+
+    // Register Smart TV Remote Keys (Tizen, webOS)
+    try {
+      if (window.tizen && window.tizen.tvinputdevice) {
+        window.tizen.tvinputdevice.registerKey("Return");
+        window.tizen.tvinputdevice.registerKey("Exit");
+        window.tizen.tvinputdevice.registerKey("Info");
+      }
+    } catch (e) {}
+  }
+
+  // --- App Initialization ---
+  function initApp() {
+    initHistoryGuard();
+    renderTabs();
+    renderFilters();
+    renderContinueWatching();
+    setupEventDelegation();
+    fetchMedia(function () {
+      var firstTab = document.querySelector(".tv-tab.active") || document.querySelector(".tv-tab");
+      if (firstTab) focusElement(firstTab);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initApp);
+  } else {
+    initApp();
+  }
+
+})();
+
+</script>
+  </body>
+</html>
